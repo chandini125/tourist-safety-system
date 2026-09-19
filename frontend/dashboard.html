@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafeTrip | Tourist Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- Dashboard Navigation -->
+    <header class="dashboard-nav">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>SafeTrip</span>
+        </div>
+
+        <div class="nav-right">
+            <span class="welcome-text">
+                Welcome, <strong id="touristName">Tourist</strong>
+            </span>
+
+            <button class="logout-btn" id="logoutBtn">
+                Logout
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- Dashboard -->
+    <main class="dashboard">
+
+        <div class="dashboard-heading">
+
+            <div>
+                <span class="eyebrow">TOURIST DASHBOARD</span>
+
+                <h1>Your Safety Center</h1>
+
+                <p>
+                    Monitor your journey, safety status and emergency information.
+                </p>
+            </div>
+
+            <div class="live-status">
+                <span class="live-dot"></span>
+                Protection Active
+            </div>
+
+        </div>
+
+
+        <!-- Safety Overview -->
+        <section class="overview-grid">
+
+            <div class="dashboard-card safety-card">
+
+                <div class="card-top">
+                    <span>Safety Status</span>
+                    <span class="status-icon">✓</span>
+                </div>
+
+                <h2 id="safetyStatus">SAFE</h2>
+
+                <p>
+                    No immediate safety threats detected.
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-top">
+                    <span>Current Location</span>
+                    <span>📍</span>
+                </div>
+
+                <h2 id="locationStatus">Waiting for GPS</h2>
+
+                <p>
+                    Location monitoring will appear here.
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-top">
+                    <span>Risk Level</span>
+                    <span>◉</span>
+                </div>
+
+                <h2 id="riskLevel">LOW</h2>
+
+                <p>
+                    AI risk analysis status.
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-top">
+                    <span>Tourist ID</span>
+                    <span>✦</span>
+                </div>
+
+                <h2 id="touristId">--</h2>
+
+                <p>
+                    Your verified SafeTrip identity.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Main Dashboard Area -->
+        <section class="main-grid">
+
+            <!-- Map -->
+            <div class="dashboard-card map-card">
+
+                <div class="section-title">
+
+                    <div>
+                        <span class="eyebrow">LIVE MONITORING</span>
+                        <h2>Your Location</h2>
+                    </div>
+
+                    <span class="gps-status">
+                        GPS Active
+                    </span>
+
+                </div>
+
+                <div class="map-placeholder">
+
+                    <div class="map-message">
+                        <div class="map-icon">📍</div>
+
+                        <h3>Live Map</h3>
+
+                        <p>
+                            Your real-time location will appear here.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Digital ID -->
+            <div class="dashboard-card digital-id-card">
+
+                <span class="eyebrow">VERIFIED IDENTITY</span>
+
+                <h2>Digital Tourist ID</h2>
+
+                <div class="id-box">
+
+                    <div class="id-symbol">
+                        ✦
+                    </div>
+
+                    <div>
+                        <span>Tourist ID</span>
+                        <strong id="digitalTouristId">
+                            ST-000000
+                        </strong>
+                    </div>
+
+                </div>
+
+                <div class="verification">
+                    <span class="verified-dot"></span>
+                    Identity verification active
+                </div>
+
+                <button class="verify-btn">
+                    View Digital ID
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Alerts and Emergency -->
+        <section class="bottom-grid">
+
+            <div class="dashboard-card">
+
+                <div class="section-title">
+
+                    <div>
+                        <span class="eyebrow">SAFETY ACTIVITY</span>
+                        <h2>Recent Alerts</h2>
+                    </div>
+
+                </div>
+
+                <div class="empty-alert">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>No active alerts</strong>
+
+                        <p>
+                            Your recent safety notifications will appear here.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card emergency-card">
+
+                <span class="eyebrow">EMERGENCY</span>
+
+                <h2>Need immediate help?</h2>
+
+                <p>
+                    Press the SOS button to send an emergency alert.
+                </p>
+
+                <button class="sos-btn" id="sosBtn">
+                    SOS
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        SafeTrip · Tourist Safety System · 2026
+    </footer>
+
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>

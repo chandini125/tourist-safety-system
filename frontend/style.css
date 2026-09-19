@@ -629,3 +629,38 @@ footer p {
         text-align: center;
     }
 }
+/* ================================
+   Login Section
+   ================================ */
+
+.login-section {
+    padding: 90px 7%;
+
+    background: #f7f9fc;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+
+    padding: 32px;
+
+    background: white;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 60px rgba(25, 45, 75, 0.10);
+}
+
+.login-card #loginMessage {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+}

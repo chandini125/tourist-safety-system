@@ -49,3 +49,45 @@ function scrollToRegister() {
         behavior: "smooth"
     });
 }
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const loginData = {
+        email: document.getElementById("loginEmail").value,
+        password: document.getElementById("loginPassword").value
+    };
+
+    loginMessage.textContent = "Signing in...";
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem("tourist_id", data.tourist_id);
+            localStorage.setItem("tourist_name", data.name);
+            localStorage.setItem("tourist_email", data.email);
+
+            window.location.href = "dashboard.html";
+        } else {
+            loginMessage.textContent =
+                data.detail || "Login failed.";
+        }
+
+    } catch (error) {
+        loginMessage.textContent =
+            "Unable to connect to the server.";
+
+        console.error(error);
+    }
+});
