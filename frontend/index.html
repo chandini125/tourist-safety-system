@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafeTrip | Tourist Safety System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>SafeTrip</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">How It Works</a>
+            <a href="#register">Register</a>
+        </nav>
+
+        <button class="nav-login" onclick="scrollToRegister()">
+            Get Started
+        </button>
+    </header>
+
+
+    <!-- Hero Section -->
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    AI-Powered Tourist Protection
+                </div>
+
+                <h1>
+                    Explore freely.<br>
+                    <span>Stay protected.</span>
+                </h1>
+
+                <p class="hero-description">
+                    A smart tourist safety platform combining
+                    real-time location monitoring, AI-based risk
+                    detection, geo-fencing and verified digital identity.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="primary-btn" onclick="scrollToRegister()">
+                        Create SafeTrip ID
+                        <span>→</span>
+                    </button>
+
+                    <a href="#features" class="secondary-btn">
+                        Discover how it works
+                    </a>
+                </div>
+
+                <div class="trust-row">
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Safety monitoring</span>
+                    </div>
+
+                    <div>
+                        <strong>AI</strong>
+                        <span>Risk detection</span>
+                    </div>
+
+                    <div>
+                        <strong>GPS</strong>
+                        <span>Live protection</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Registration Card -->
+            <div class="register-card" id="register">
+
+                <div class="card-header">
+                    <div class="card-icon">✦</div>
+
+                    <div>
+                        <h2>Create your account</h2>
+                        <p>Get your verified tourist identity</p>
+                    </div>
+                </div>
+
+                <form id="registerForm">
+
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="two-column">
+
+                        <div class="input-group">
+                            <label for="phone">Phone</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Phone number"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="emergency_contact">
+                                Emergency Contact
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="emergency_contact"
+                                placeholder="Emergency number"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a secure password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        Create Account
+                        <span>→</span>
+                    </button>
+
+                    <p class="form-note">
+                        Your information is securely protected.
+                    </p>
+
+                    <p id="message"></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- Features -->
+        <section class="features" id="features">
+
+            <div class="section-heading">
+                <span>SMART PROTECTION</span>
+
+                <h2>
+                    Safety technology built around you.
+                </h2>
+
+                <p>
+                    SafeTrip combines multiple technologies to help
+                    tourists stay aware, connected and protected.
+                </p>
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+
+                    <h3>Real-Time Location</h3>
+
+                    <p>
+                        Monitor your location while travelling
+                        with browser-based GPS tracking.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+
+                    <h3>Smart Geo-Fencing</h3>
+
+                    <p>
+                        Detect when you enter safe, restricted
+                        or high-risk geographical zones.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+
+                    <h3>AI Risk Detection</h3>
+
+                    <p>
+                        Analyze movement patterns and identify
+                        unusual situations that may require attention.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+
+                    <h3>Verified Digital ID</h3>
+
+                    <p>
+                        Generate a secure tourist identity that
+                        can be verified using a digital record.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-logo">
+            <span>✦</span>
+            SafeTrip
+        </div>
+
+        <p>
+            AI-powered tourist safety and protection platform.
+        </p>
+
+        <span class="copyright">
+            Tourist Safety System · 2026
+        </span>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
