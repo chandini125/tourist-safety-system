@@ -8,6 +8,7 @@
     <title>SafeTrip | Tourist Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css"/>
 </head>
 
 <body>
@@ -144,23 +145,9 @@
 
                 </div>
 
-                <div class="map-placeholder">
-
-                    <div class="map-message">
-                        <div class="map-icon">📍</div>
-
-                        <h3>Live Map</h3>
-
-                        <p>
-                            Your real-time location will appear here.
-                        </p>
-                    </div>
-
-                </div>
+               <div id="map"></div>
 
             </div>
-
-
             <!-- Digital ID -->
             <div class="dashboard-card digital-id-card">
 
@@ -211,7 +198,7 @@
 
                 </div>
 
-                <div class="empty-alert">
+                <div class="empty-alert"id="alertBox">
 
                     <span>✓</span>
 
@@ -253,7 +240,7 @@
         SafeTrip · Tourist Safety System · 2026
     </footer>
 
-
+<script src="node_modules/leaflet/dist/leaflet.js"></script>
     <script src="dashboard.js"></script>
 
 </body>

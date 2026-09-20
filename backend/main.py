@@ -7,6 +7,7 @@ from database import Base, engine, SessionLocal
 import models
 from schemas import TouristCreate, TouristLogin
 from auth import verify_password
+from ai.risk_engine import calculate_risk
 
 Base.metadata.create_all(bind=engine)
 
@@ -108,3 +109,95 @@ def login_tourist(
         "name": existing_tourist.name,
         "email": existing_tourist.email
     }
+@app.get("/zones")
+def get_zones(db: Session = Depends(get_db)):
+    zones = db.query(models.Zone).all()
+
+    return [
+        {
+            "zone_id": zone.zone_id,
+            "zone_name": zone.zone_name,
+            "zone_type": zone.zone_type,
+            "latitude": float(zone.latitude),
+            "longitude": float(zone.longitude),
+            "radius": zone.radius,
+            "risk_level": zone.risk_level,
+            "description": zone.description
+        }
+        for zone in zones
+    ]
+@app.post("/sos")
+def create_sos_alert(
+    tourist_id: int,
+    latitude: float,
+    longitude: float,
+    db: Session = Depends(get_db)
+):
+    new_alert = models.Alert(
+        tourist_id=tourist_id,
+        alert_type="SOS",
+        risk_level="CRITICAL",
+        latitude=str(latitude),
+        longitude=str(longitude),
+        message="Emergency SOS activated",
+        status="ACTIVE"
+    )
+
+    db.add(new_alert)
+    db.commit()
+    db.refresh(new_alert)
+
+    return {
+        "message": "SOS alert created successfully",
+        "alert_id": new_alert.alert_id,
+        "tourist_id": new_alert.tourist_id,
+        "risk_level": new_alert.risk_level
+    }
+@app.post("/zone-alert")
+def create_zone_alert(
+    tourist_id: int,
+    latitude: float,
+    longitude: float,
+    alert_type: str,
+    risk_level: str,
+    message: str,
+    db: Session = Depends(get_db)
+):
+    new_alert = models.Alert(
+        tourist_id=tourist_id,
+        alert_type=alert_type,
+        risk_level=risk_level,
+        latitude=str(latitude),
+        longitude=str(longitude),
+        message=message,
+        status="ACTIVE"
+    )
+
+    db.add(new_alert)
+    db.commit()
+    db.refresh(new_alert)
+
+    return {
+        "message": "Zone alert created successfully",
+        "alert_id": new_alert.alert_id,
+        "tourist_id": tourist_id,
+        "alert_type": alert_type,
+        "risk_level": risk_level
+    }
+@app.post("/calculate-risk")
+def calculate_tourist_risk(
+    zone_risk: str,
+    speed: float,
+    stationary_time: float,
+    route_deviation: bool,
+    night_movement: bool
+):
+    result = calculate_risk(
+        zone_risk,
+        speed,
+        stationary_time,
+        route_deviation,
+        night_movement
+    )
+
+    return result
