@@ -24,7 +24,7 @@ def calculate_risk(
         score += 20
 
     # Abnormal speed
-    if speed > 80:
+    if speed > 22.22:
         score += 15
 
     # Night movement

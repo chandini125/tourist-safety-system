@@ -28,7 +28,75 @@ document.getElementById("logoutBtn").addEventListener("click", function () {
 });
 let map;
 let marker;
+let  lastLatitude =null;
+let lastLongitude=null;
+let stationaryStartTime=null;
+const routeLatitude=14.4674;
+const routeLongitude=78.8241;
+const routeDeviationDistance=500;
+function calculateStationaryTime(latitude, longitude) {
 
+    if (lastLatitude === null || lastLongitude === null) {
+        lastLatitude = latitude;
+        lastLongitude = longitude;
+        stationaryStartTime = Date.now();
+
+        return 0;
+    }
+
+    const previousLocation = L.latLng(
+        lastLatitude,
+        lastLongitude
+    );
+
+    const currentLocation = L.latLng(
+        latitude,
+        longitude
+    );
+
+    const distance = previousLocation.distanceTo(
+        currentLocation
+    );
+
+    // Consider the tourist stationary if movement is less than 10 meters
+    if (distance < 10) {
+
+        const stationaryTime =
+            (Date.now() - stationaryStartTime) / 60000;
+
+        return stationaryTime;
+
+    } else {
+
+        lastLatitude = latitude;
+        lastLongitude = longitude;
+        stationaryStartTime = Date.now();
+
+        return 0;
+    }
+}
+function calculateRouteDeviation(latitude, longitude) {
+
+    const expectedLocation = L.latLng(
+        routeLatitude,
+        routeLongitude
+    );
+
+    const currentLocation = L.latLng(
+        latitude,
+        longitude
+    );
+
+    const distance = expectedLocation.distanceTo(
+        currentLocation
+    );
+
+    return distance > routeDeviationDistance;
+}
+function isNightMovement(){
+	const hour =new Date().getHours();
+	return hour>=22 ||hour<6;
+}
 if ("geolocation" in navigator) {
 
     navigator.geolocation.watchPosition(
@@ -36,7 +104,11 @@ if ("geolocation" in navigator) {
 
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-	   checkZone(latitude,longitude);
+	const speed =position.coords.speed || 0;
+	const stationaryTime=calculateStationaryTime(latitude,longitude);	  
+	const routeDeviation=calculateRouteDeviation(latitude,longitude);
+	const nightMovement = isNightMovement();
+ checkZone(latitude,longitude,speed,stationaryTime,routeDeviation,nightMovement);
             if (!map) {
 
                 map = L.map("map").setView(
@@ -115,11 +187,11 @@ L.circle(
         console.error("Unable to load zones:", error);
     }
 }
-function checkZone(latitude, longitude) {
+async function checkZone(latitude, longitude,speed,stationaryTime,routeDeviation,nightMovement) {
 
     fetch("http://127.0.0.1:8000/zones")
         .then(response => response.json())
-        .then(zones => {
+        .then(async zones => {
 
             let highestRiskZone = null;
             let highestRiskScore = -1;
@@ -166,8 +238,41 @@ function checkZone(latitude, longitude) {
             });
 
             if (highestRiskZone) {
-                showZoneAlert(highestRiskZone,latitude,longitude);
-            }
+
+    const safetyStatus =
+        document.getElementById("safetyStatus");
+    const riskLevel=document.getElementById("riskLevel");
+    if (highestRiskZone.zone_type === "SAFE") {
+        safetyStatus.textContent = "SAFE";
+    }
+
+    if (highestRiskZone.zone_type === "RESTRICTED") {
+        safetyStatus.textContent = "RESTRICTED";
+    }
+
+    if (highestRiskZone.zone_type === "DANGER") {
+        safetyStatus.textContent = "DANGER";
+    }
+
+    showZoneAlert(
+        highestRiskZone,
+        latitude,
+        longitude
+    );
+const aiResult = await getAIRisk(
+    highestRiskZone.risk_level,
+    speed,
+    stationaryTime,
+    routeDeviation,
+    nightMovement
+);
+
+if (aiResult) {
+    console.log("ZONE AI RISK:", aiResult);
+    riskLevel.textContent=aiResult.risk_level
+
+}
+}
 
         })
         .catch(error => {
