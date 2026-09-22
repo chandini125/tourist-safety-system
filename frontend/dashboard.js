@@ -242,6 +242,7 @@ async function checkZone(latitude, longitude,speed,stationaryTime,routeDeviation
     const safetyStatus =
         document.getElementById("safetyStatus");
     const riskLevel=document.getElementById("riskLevel");
+    const riskMessage=document.getElementById("riskMessage");
     if (highestRiskZone.zone_type === "SAFE") {
         safetyStatus.textContent = "SAFE";
     }
@@ -268,9 +269,43 @@ const aiResult = await getAIRisk(
 );
 
 if (aiResult) {
-    console.log("ZONE AI RISK:", aiResult);
-    riskLevel.textContent=aiResult.risk_level
 
+    console.log("ZONE AI RISK:", aiResult);
+
+    riskLevel.textContent = aiResult.risk_level;
+    if (aiResult.risk_level === "LOW") {
+    riskMessage.textContent =
+        "No unusual activity detected.";
+}
+
+if (aiResult.risk_level === "MEDIUM") {
+    riskMessage.textContent =
+        "Moderate risk detected. Please stay alert.";
+}
+
+if (aiResult.risk_level === "HIGH") {
+    riskMessage.textContent =
+        "High-risk conditions detected. Please move to a safe area.";
+}
+
+if (aiResult.risk_level === "CRITICAL") {
+    riskMessage.textContent =
+        "Critical risk detected. Emergency attention may be required.";
+}
+    if (aiResult.risk_level === "LOW") {
+        safetyStatus.textContent = "SAFE";
+    }
+
+    if (aiResult.risk_level === "MEDIUM") {
+        safetyStatus.textContent = "RESTRICTED";
+    }
+
+    if (
+        aiResult.risk_level === "HIGH" ||
+        aiResult.risk_level === "CRITICAL"
+    ) {
+        safetyStatus.textContent = "DANGER";
+    }
 }
 }
 
