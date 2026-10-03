@@ -511,3 +511,16 @@ height:420px;
 border-radius:16px;
 overflow:hidden;
 }
+.qr-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.qr-code {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 12px;
+    padding: 8px;
+    background: white;
+}

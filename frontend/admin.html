@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Tourist Safety System</title>
+
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <header class="admin-header">
+            <div>
+                <h1>Tourist Safety Admin Dashboard</h1>
+                <p>Monitor tourist locations and safety status</p>
+            </div>
+
+            <button id="refreshBtn">Refresh</button>
+        </header>
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>Tourist ID</h3>
+                <p id="touristId">--</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Latitude</h3>
+                <p id="latitude">--</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Longitude</h3>
+                <p id="longitude">--</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Speed</h3>
+                <p id="speed">--</p>
+            </div>
+
+        </section>
+
+        <section class="location-card">
+
+            <h2>Latest Tourist Location</h2>
+
+            <div id="locationStatus">
+                Loading location...
+            </div>
+
+            <p>
+                Last Updated:
+                <span id="timestamp">--</span>
+            </p>
+
+        </section>
+        <section class="location-card">
+		<h2>Tourist Location Map</h2>
+		<div id="adminMap"></div>
+	</section>
+    </div>
+
+	<section class="location-card">
+    <h2>Latest Safety Alerts</h2>
+
+    <div id="alertsContainer">
+        Loading alerts...
+    </div>
+</section>
+<section class="location-card">
+    <h2>Registered Tourists</h2>
+
+    <div class="tourist-table-wrapper">
+        <table id="touristsTable">
+            <thead>
+                <tr>
+                    <th>Tourist ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Registered</th>
+                </tr>
+            </thead>
+
+            <tbody id="touristsBody">
+                <tr>
+                    <td colspan="4">Loading tourists...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section class="location-card">
+    <h2>AI Safety Risk Monitoring</h2>
+
+    <div class="risk-monitor">
+
+        <div>
+            <span>Tourist ID</span>
+            <strong id="riskTouristId">--</strong>
+        </div>
+
+        <div>
+            <span>Risk Score</span>
+            <strong id="riskScore">--</strong>
+        </div>
+
+        <div>
+            <span>Risk Level</span>
+            <strong id="riskLevel">--</strong>
+        </div>
+
+    </div>
+
+    <p id="riskMessage">
+        Waiting for AI risk assessment...
+    </p>
+</section>
+<section class="location-card">
+    <h2>Digital ID & Blockchain Verification</h2>
+
+    <div class="risk-monitor">
+        <div>
+            <span>Digital ID</span>
+            <strong id="adminDigitalId">--</strong>
+        </div>
+
+        <div>
+            <span>Verification</span>
+            <strong id="adminVerificationStatus">Checking...</strong>
+        </div>
+    </div>
+
+    <p id="blockchainMessage">
+        Verifying Digital ID integrity...
+    </p>
+</section>
+	<script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

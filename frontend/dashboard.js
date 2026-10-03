@@ -105,6 +105,7 @@ if ("geolocation" in navigator) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 	const speed =position.coords.speed || 0;
+	saveLocationToBackend(latitude,longitude,speed)
 	const stationaryTime=calculateStationaryTime(latitude,longitude);	  
 	const routeDeviation=calculateRouteDeviation(latitude,longitude);
 	const nightMovement = isNightMovement();
@@ -526,5 +527,40 @@ async function getAIRisk(
         console.error("AI risk error:", error);
 
         return null;
+    }
+}
+async function saveLocationToBackend(latitude, longitude, speed) {
+    const touristId = localStorage.getItem("tourist_id");
+
+    if (!touristId) {
+        console.error("Tourist ID not found.");
+        return;
+    }
+
+    try {
+        const params = new URLSearchParams({
+            tourist_id: touristId,
+            latitude: latitude,
+            longitude: longitude,
+            speed: speed || 0
+        });
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/locations?" + params.toString(),
+            {
+                method: "POST"
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.detail || "Failed to save location");
+        }
+
+        console.log("LOCATION SAVED:", data);
+
+    } catch (error) {
+        console.error("Location save error:", error);
     }
 }
