@@ -13,7 +13,7 @@ def calculate_risk(
     elif zone_risk == "HIGH":
         score += 30
     elif zone_risk == "CRITICAL":
-        score += 40
+        score += 90
 
     # Long inactivity
     if stationary_time > 30:
